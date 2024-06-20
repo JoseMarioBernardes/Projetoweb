@@ -1,0 +1,65 @@
+{% include 'layout.html' %}
+
+<div class="container">
+    <div class="card text-center">
+        <div class="card-header">
+            Suas Atividades
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Lista das Tarefas:</h5>
+            <p class="card-text">Informações relacionadas as atividades que precisam ser completadas:</p>
+
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Informações</th>
+                    <th scope="col">Ações</th>
+
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for todo in todos %}
+                {% if todo.complete == False %}
+                <tr class="pointer">
+
+                    <td>{{loop.index}}</td>
+                    <td>{{todo.title}}</td>
+                    <td>
+                        <button onclick="window.location.href='complete/{{todo.id}}'"
+                                type="button" class="btn btn-success">Completar</button>
+                        <button onclick="window.location.href='edit-todo/{{todo.id}}'"
+                                type="button" class="btn btn-info">
+                            Editar
+                        </button>
+                    </td>
+                </tr>
+
+                {% else %}
+                <tr class="pointer alert alert-success">
+
+                    <td>{{loop.index}}</td>
+                    <td class="strike-through-td">{{todo.title}}</td>
+                    <td>
+                        <button onclick="window.location.href='complete/{{todo.id}}'"
+                                type="button" class="btn btn-danger">Desfazer
+                        </button>
+                        <button onclick="window.location.href='edit-todo/{{todo.id}}'"
+                                type="button" class="btn btn-info">
+                            Editar
+                        </button>
+                    </td>
+                </tr>
+
+                {% endif %}
+                {% endfor %}
+
+                </tbody>
+            </table>
+
+            <a href="add-todo" class="btn btn-primary">Adicionar Tarefa</a>
+        </div>
+    </div>
+</div>
+
